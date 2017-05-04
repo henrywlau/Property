@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<table class="table">
+
+    <tr>
+        <th>Address</th>
+        <th># of Units</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip Code</th>
+    </tr>
+
+    <tr th:each="building : ${buildings}">
+        <td th:text="${building.address}"></td>
+        <td th:text="${building.units"></td>
+        <td th:text="${building.city}"></td>
+        <td th:text="${building.state}"></td>
+        <td th:text="${building.zipCode}"></td>
+    </tr>
+
+</table>
+
+<p th:unless="${buildings} and ${buildings.size()}">No Buildings</p>
+
+</body>
+</html>
