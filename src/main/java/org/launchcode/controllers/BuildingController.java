@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -45,6 +46,22 @@ public class BuildingController {
         }
 
         buildingDao.save(newBuilding);
+        return "redirect:";
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveBuildingForm(Model model) {
+        model.addAttribute("title", "Remove Building");
+        model.addAttribute("buildings", buildingDao.findAll());
+        return "building/remove";
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveBuildingForm(@RequestParam int[] buildingIds) {
+
+        for (int buildingId : buildingIds) {
+            buildingDao.delete(buildingId);
+        }
         return "redirect:";
     }
 }
