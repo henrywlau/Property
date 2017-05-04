@@ -3,6 +3,7 @@ package org.launchcode.models.forms;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by henry on 5/3/17.
@@ -12,11 +13,21 @@ public class Building {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private int id;
+
+    @NotNull
     private String address;
+
+    @NotNull
     private Integer units;
+
+    @NotNull
     private String city;
+
+    @NotNull
     private String state;
+
+    @NotNull
     private Integer zipCode;
 
     public Building(String address, Integer units, String city, String state, Integer zipCode) {
