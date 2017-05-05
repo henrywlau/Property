@@ -24,6 +24,7 @@ public class Tenant {
 
     @NotNull
     private Integer phoneNumber;
+
     private Integer altNumber;
 
     @Email
