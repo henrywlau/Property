@@ -1,10 +1,10 @@
 package org.launchcode.models.forms;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by henry on 5/3/17.
@@ -21,7 +21,6 @@ public class Building {
     private String address;
 
     @NotNull
-    @Size(min=1)
     private Integer units;
 
     @NotNull
@@ -33,8 +32,11 @@ public class Building {
     private String state;
 
     @NotNull
-    @Size(min=5, max=5)
     private Integer zipCode;
+
+    @OneToMany
+    @JoinColumn(name = "building_id")
+    private List<Tenant> tenants = new ArrayList<>();
 
     public Building(String address, Integer units, String city, String state, Integer zipCode) {
         this.address = address;

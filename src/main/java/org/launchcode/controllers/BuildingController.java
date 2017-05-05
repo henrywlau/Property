@@ -38,14 +38,14 @@ public class BuildingController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddBuildingForm(@ModelAttribute @Valid Building newBuilding, Errors errors, Model model) {
+    public String processAddBuildingForm(@ModelAttribute @Valid Building building, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Building");
             return "building/add";
         }
 
-        buildingDao.save(newBuilding);
+        buildingDao.save(building);
         return "redirect:";
     }
 

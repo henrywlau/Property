@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Email;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -22,8 +23,14 @@ public class Tenant {
     @Size(min=3, max=15)
     private String name;
 
+    @ManyToOne
+    private Building building;
+
     @NotNull
-    private Integer phoneNumber;
+    private String unit;
+
+    @NotNull
+    private int phoneNumber;
 
     private Integer altNumber;
 
@@ -78,5 +85,21 @@ public class Tenant {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

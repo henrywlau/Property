@@ -1,6 +1,8 @@
 package org.launchcode.controllers;
 
+import org.launchcode.models.data.BuildingDao;
 import org.launchcode.models.data.TenantDao;
+import org.launchcode.models.forms.Building;
 import org.launchcode.models.forms.Tenant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class TenantController {
     @Autowired
     private TenantDao tenantDao;
 
+    @Autowired
+    private BuildingDao buildingDao;
+
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("title", "Tenants");
@@ -34,17 +39,20 @@ public class TenantController {
     public String displayAddTenantForm(Model model) {
         model.addAttribute("title", "Add Tenant");
         model.addAttribute(new Tenant());
+        model.addAttribute("buildings", buildingDao.findAll());
         return "tenant/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddTenantForm(@ModelAttribute @Valid Tenant newTenant, Errors errors, Model model) {
+    public String processAddTenantForm(@ModelAttribute @Valid Tenant newTenant, Errors errors, @RequestParam int buildingId, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Tenant");
             return "tenant/add";
         }
 
+        Building building = buildingDao.findOne(buildingId);
+        newTenant.setBuilding(building);
         tenantDao.save(newTenant);
         return "redirect:";
     }

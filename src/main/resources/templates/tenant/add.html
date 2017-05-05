@@ -7,7 +7,25 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<p></p>
+
 <form method="post" style="max-width:600px;" th:object="${tenant}">
+
+    <div class="form-group">
+        <label th:for="building">Building</label>
+        <select name="buildingId">
+            <option th:each="building : ${buildings}"
+                    th:text="${building.address + ', ' + building.city + ', ' + building.state + ', ' + building.zipCode}"
+                    th:value="${building.id}">
+
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label th:for="unit">Unit</label>
+        <input class="form-control" th:field="*{unit}" />
+        <span th:errors="*{unit}" class="error"></span>
+    </div>
     <div class="form-group">
         <label th:for="name">Name</label>
         <input class="form-control" th:field="*{name}" />

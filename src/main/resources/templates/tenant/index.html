@@ -12,6 +12,8 @@
 
     <tr>
         <th>Name</th>
+        <th>Building</th>
+        <th>Unit</th>
         <th>Phone Number</th>
         <th>Alt Phone Number</th>
         <th>Email</th>
@@ -19,6 +21,8 @@
 
     <tr th:each="tenant : ${tenants}">
         <td th:text="${tenant.name}"></td>
+        <td th:text="${tenant.building.address + ', ' + tenant.building.city + ', ' + tenant.building.state + ', ' + tenant.building.zipCode}"></td>
+        <td th:text="${tenant.unit}"></td>
         <td th:text="${tenant.phoneNumber}"></td>
         <td th:text="${tenant.altNumber}"></td>
         <td th:text="${tenant.email}"></td>
