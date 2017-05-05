@@ -48,4 +48,13 @@ public class TenantController {
         return "redirect:";
     }
 
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveTenantForm(Model model) {
+        model.addAttribute("title", "Remove Tenant");
+        model.addAttribute("tenants", tenantDao.findAll());
+        return "tenant/remove";
+    }
+
+
+
 }

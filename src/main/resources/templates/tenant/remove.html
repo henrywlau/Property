@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<h4>Select tenant(s) to remove:</h4>
+
+<form method="post">
+    <div th:each="tenant : ${tenants}" class="checkbox">
+        <input type="checkbox" name="tenantIds" th:value="${tenant.id}" th:id="${tenant.id}" />
+        <label th:for="${tenant.id}" th:text="${tenant.name}"></label>
+        <br />
+    </div>
+
+    <input type="submit" value="Remove Tenant(s)" />
+</form>
+
+<p th:unless="${tenants} and ${tenants.size()}">No Buildings</p>
+
+</body>
+</html>
