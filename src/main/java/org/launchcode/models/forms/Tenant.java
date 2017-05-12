@@ -37,16 +37,19 @@ public class Tenant {
     @Email
     private String email;
 
-//    private Integer rentAmt;
-//    private Integer depositAmt;
-//    private Date moveInDate;
-//    private Date depositPaidDate;
+    @NotNull
+    private Integer rent;
 
-    public Tenant(String name, String phoneNumber, String altNumber, String email) {
+    @NotNull
+    private String moveInDate;
+
+    public Tenant(String name, String phoneNumber, String altNumber, String email, Integer rent, String moveInDate) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.altNumber = altNumber;
         this.email = email;
+        this.rent = rent;
+        this.moveInDate = moveInDate;
     }
 
     public Tenant() { }
@@ -101,5 +104,21 @@ public class Tenant {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public Integer getRent() {
+        return rent;
+    }
+
+    public void setRent(Integer rent) {
+        this.rent = rent;
+    }
+
+    public String getMoveInDate() {
+        return moveInDate;
+    }
+
+    public void setMoveInDate(String moveInDate) {
+        this.moveInDate = moveInDate;
     }
 }

@@ -46,6 +46,16 @@
         <input class="form-control" th:field="*{email}" />
         <span th:errors="*{email}" class="error"></span>
     </div>
+    <div class="form-group">
+        <label th:for="rent">Monthly Rent</label>
+        <input class="form-control" th:field="*{rent}" />
+        <span th:errors="*{rent}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="moveInDate">Move In Date</label>
+        <input class="form-control" th:field="*{moveInDate}" />
+        <span th:errors="*{moveInDate}" class="error"></span>
+    </div>
 
     <input type="submit" value="Add Tenant" />
 </form>
