@@ -20,19 +20,19 @@ public class Tenant {
     private int id;
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min=3, max=20)
     private String name;
 
     @ManyToOne
     private Building building;
 
-    @NotNull
     private String unit;
 
     @NotNull
-    private int phoneNumber;
+    @Size(min=7, max=10)
+    private String phoneNumber;
 
-    private Integer altNumber;
+    private String altNumber;
 
     @Email
     private String email;
@@ -42,7 +42,7 @@ public class Tenant {
 //    private Date moveInDate;
 //    private Date depositPaidDate;
 
-    public Tenant(String name, Integer phoneNumber, Integer altNumber, String email) {
+    public Tenant(String name, String phoneNumber, String altNumber, String email) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.altNumber = altNumber;
@@ -63,19 +63,19 @@ public class Tenant {
         this.name = name;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public Integer getAltNumber() {
+    public String getAltNumber() {
         return altNumber;
     }
 
-    public void setAltNumber(Integer altNumber) {
+    public void setAltNumber(String altNumber) {
         this.altNumber = altNumber;
     }
 
