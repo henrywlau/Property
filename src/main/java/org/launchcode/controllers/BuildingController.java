@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -63,5 +60,26 @@ public class BuildingController {
             buildingDao.delete(buildingId);
         }
         return "redirect:";
+    }
+
+    @RequestMapping(value = "edit/{buildingId}", method = RequestMethod.GET)
+    public String displayEditForm(Model model, @PathVariable int buildingId) {
+        Building building = buildingDao.findOne(buildingId);
+        model.addAttribute("title", "Edit Building");
+        model.addAttribute("building", building);
+        return "building/edit";
+    }
+
+    @RequestMapping(value = "edit/{buildingId}", method = RequestMethod.POST)
+    public String processEditForm(@ModelAttribute @Valid Building building, Errors errors, Model model, @PathVariable int buildingId) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Building");
+            model.addAttribute("building", building);
+            return "building/edit";
+        }
+//        building.setAddress(address);
+//        buildingDao.delete(buildingId);
+//        buildingDao.save(building);
+        return "building/index";
     }
 }

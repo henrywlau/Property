@@ -24,6 +24,7 @@
         <td th:text="${building.city}"></td>
         <td th:text="${building.state}"></td>
         <td th:text="${building.zipCode}"></td>
+        <td><a th:href="@{'/building/edit/' + ${building.id}}">edit</a></td>
     </tr>
 
 </table>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+<h1 th:text="${title}">Default Title</h1>
+
+<!--<div class="alert alert-success" role="alert" th:text="${'Edit cheese ' + cheese.name + ' ' + cheese.cheeseId}"></div>-->
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post" style="max-width:600px;" th:object="${building}">
+    <div class="form-group">
+        <label th:for="address">Address</label>
+        <input class="form-control" th:field="*{address}" />
+        <span th:errors="*{address}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="units">Number of Units</label>
+        <input class="form-control" th:field="*{units}" />
+        <span th:errors="*{units}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="city">City</label>
+        <input class="form-control" th:field="*{city}" />
+        <span th:errors="*{city}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="state">State</label>
+        <input class="form-control" th:field="*{state}" />
+        <span th:errors="*{state}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="zipCode">Zip Code</label>
+        <input class="form-control" th:field="*{zipCode}" />
+        <span th:errors="*{zipCode}" class="error"></span>
+    </div>
+
+    <input type="hidden" value="${building.buildingId}" name="buildingId" />
+    <input type="submit" value="Edit Building" />
+</form>
+
+</body>
+</html>
