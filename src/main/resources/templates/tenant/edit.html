@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+<h1 th:text="${title + ': ' + tenant.name}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<h3 th:text="${successMessage}"></h3>
+
+<form method="post" style="max-width:600px;" th:object="${tenant}">
+
+    <div class="form-group">
+        <label th:for="building">Building</label>
+        <select name="buildingId">
+            <option th:each="building : ${buildings}"
+                    th:text="${building.address + ', ' + building.city + ', ' + building.state + ', ' + building.zipCode}"
+                    th:value="${building.id}">
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label th:for="unit">Unit</label>
+        <input class="form-control" th:field="*{unit}" />
+        <span th:errors="*{unit}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="phoneNumber">Phone number</label>
+        <input class="form-control" th:field="*{phoneNumber}" />
+        <span th:errors="*{phoneNumber}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="altNumber">Alternate Phone Number (optional)</label>
+        <input class="form-control" th:field="*{altNumber}" />
+        <span th:errors="*{altNumber}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="email">Email (optional)</label>
+        <input class="form-control" th:field="*{email}" />
+        <span th:errors="*{email}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="rent">Monthly Rent</label>
+        <input class="form-control" th:field="*{rent}" />
+        <span th:errors="*{rent}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="moveInDate">Move In Date</label>
+        <input class="form-control" th:field="*{moveInDate}" />
+        <span th:errors="*{moveInDate}" class="error"></span>
+    </div>
+
+    <input type="hidden" value="${tenant.tenantId}" th:field="*{id}" name="id" />
+    <input type="submit" value="Edit Tenant" />
+</form>
+
+</body>
+</html>

@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -72,4 +69,17 @@ public class TenantController {
         }
         return "redirect:";
     }
+
+    @RequestMapping(value = "edit/{tenantId}", method = RequestMethod.GET)
+    public String displayEditTenantForm(Model model, @PathVariable int tenantId) {
+        Tenant tenant = tenantDao.findOne(tenantId);
+        model.addAttribute("title", "Edit Tenant");
+        model.addAttribute("tenant", tenant);
+        model.addAttribute("buildings", buildingDao.findAll());
+        return "tenant/edit";
+    }
+
+
+
+
 }

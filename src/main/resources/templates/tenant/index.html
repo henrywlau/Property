@@ -24,6 +24,7 @@
         <td th:text="${tenant.unit}"></td>
         <td th:text="${'$' + tenant.rent}"></td>
         <td th:text="${tenant.moveInDate}"></td>
+        <td><a th:href="@{'/tenant/edit/' + ${tenant.id}}">edit</a></td>
     </tr>
 
 </table>
