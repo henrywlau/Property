@@ -71,15 +71,23 @@ public class BuildingController {
     }
 
     @RequestMapping(value = "edit/{buildingId}", method = RequestMethod.POST)
-    public String processEditForm(@ModelAttribute @Valid Building building, Errors errors, Model model, @PathVariable int buildingId) {
+    public String processEditForm(@Valid Building building, Errors errors, Model model, @PathVariable int buildingId, @RequestParam("address") String address, @RequestParam("units") Integer units, @RequestParam("city") String city, @RequestParam("state") String state, @RequestParam("zipCode") Integer zipCode) {
+
         if (errors.hasErrors()) {
             model.addAttribute("title", "Edit Building");
             model.addAttribute("building", building);
             return "building/edit";
         }
-//        building.setAddress(address);
-//        buildingDao.delete(buildingId);
-//        buildingDao.save(building);
-        return "building/index";
+
+        building.setAddress(address);
+        building.setUnits(units);
+        building.setCity(city);
+        building.setState(state);
+        building.setZipCode(zipCode);
+        building.setId(buildingId);
+        buildingDao.save(building);
+        model.addAttribute("title", "Edit Building");
+        model.addAttribute("successMessage", "Building has been modified!");
+        return "building/edit";
     }
 }
