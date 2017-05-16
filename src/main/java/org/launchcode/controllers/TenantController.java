@@ -79,7 +79,34 @@ public class TenantController {
         return "tenant/edit";
     }
 
+    @RequestMapping(value = "edit/{tenantId}", method = RequestMethod.POST)
+    public String processEditTenantForm(@ModelAttribute @Valid Tenant tenant, Errors errors, Model model, @PathVariable("tenantId") int tenantId) {
 
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Tenant");
+            model.addAttribute("buildings", buildingDao.findAll());
+            model.addAttribute("tenant", tenant);
+
+            return "tenant/edit";
+        }
+
+        Tenant editTenant = tenantDao.findOne(tenantId);
+        editTenant.setBuilding(tenant.getBuilding());
+        editTenant.setUnit(tenant.getUnit());
+        editTenant.setName(tenant.getName());
+        editTenant.setPhoneNumber(tenant.getPhoneNumber());
+        editTenant.setAltNumber(tenant.getAltNumber());
+        editTenant.setRent(tenant.getRent());
+        editTenant.setMoveInDate(tenant.getMoveInDate());
+
+        tenantDao.save(editTenant);
+
+        model.addAttribute("title", "Edit Tenant");
+        model.addAttribute("buildings", buildingDao.findAll());
+        model.addAttribute("successMessage", "Tenant has been modified!");
+        return "tenant/edit";
+
+    }
 
 
 }

@@ -88,6 +88,7 @@ public class BuildingController {
         editBuilding.setZipCode(building.getZipCode());
 
         buildingDao.save(editBuilding);
+
         model.addAttribute("title", "Edit Building");
         model.addAttribute("successMessage", "Building has been modified!");
         return "building/edit";
