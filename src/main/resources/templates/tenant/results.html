@@ -4,7 +4,7 @@
 
 <body class="container body-content">
 
-<h1 th:text="${title}">Default Title</h1>
+<h1 th:text="${title + ': ' + searchValue}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
@@ -29,11 +29,7 @@
 
 </table>
 
-<p th:unless="${tenants} and ${tenants.size()}">No Tenants</p>
-
-<a href="/tenant/add">Add Tenant</a> |
-<a href="/tenant/remove">Remove Tenant</a> |
-<a href="/tenant/search">Search Tenant</a>
+<p th:unless="${tenants} and ${tenants.size()}">No tenants found.</p>
 
 </body>
 </html>

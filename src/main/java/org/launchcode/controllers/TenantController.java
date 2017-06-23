@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 /**
  * Created by henry on 5/3/17.
@@ -108,5 +109,28 @@ public class TenantController {
 
     }
 
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    public String displaySearchForm(Model model) {
+        model.addAttribute("title", "Search Tenant");
+        return "tenant/search";
+    }
 
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    public String processSearchForm(Model model, @RequestParam String searchValue) {
+
+        Iterable<Tenant> tenants = tenantDao.findAll();
+        ArrayList<Tenant> matchingTenants = new ArrayList<>();
+
+        for (Tenant tenant : tenants) {
+            if (tenant.getName().toLowerCase().contains(searchValue.toLowerCase())
+                    || (tenant.getPhoneNumber()).contains(searchValue)) {
+                matchingTenants.add(tenant);
+            }
+        }
+
+        model.addAttribute("title", "Search Tenant");
+        model.addAttribute("searchValue", searchValue);
+        model.addAttribute("tenants", matchingTenants);
+        return "tenant/results";
+    }
 }

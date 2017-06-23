@@ -117,6 +117,7 @@ public class BuildingController {
         }
 
         model.addAttribute("title", "Search Building");
+        model.addAttribute("searchValue", searchValue);
         model.addAttribute("buildings", matchingBuildings);
         return "building/results";
     }

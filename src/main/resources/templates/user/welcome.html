@@ -6,9 +6,16 @@
 
 <h1 th:text="${'Welcome ' + user.username + '!'}"></h1>
 
-<h3>Select category:</h3>
+<p></p>
 
-<nav th:replace="fragments :: navigation"></nav>
+<h3>Select a category:</h3>
+
+<form action="/building">
+    <input type="submit" value="Buildings" />
+<form action="/tenant">
+    <input type="submit" value="Tenants" />
+</form>
+</form>
 
 </body>
 </html>
