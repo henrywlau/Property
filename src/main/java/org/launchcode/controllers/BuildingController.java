@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 /**
  * Created by henry on 5/3/17.
@@ -92,5 +93,31 @@ public class BuildingController {
         model.addAttribute("title", "Edit Building");
         model.addAttribute("successMessage", "Building has been modified!");
         return "building/edit";
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    public String displaySearchForm(Model model) {
+        model.addAttribute("title", "Search Building");
+        return "building/search";
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    public String processSearchForm(Model model, @RequestParam String searchValue) {
+
+        Iterable<Building> buildings = buildingDao.findAll();
+        ArrayList<Building> matchingBuildings = new ArrayList<>();
+
+        for (Building building : buildings) {
+            if (building.getAddress().toLowerCase().contains(searchValue.toLowerCase())
+                    || building.getCity().toLowerCase().contains(searchValue.toLowerCase())
+                    || building.getState().toLowerCase().contains(searchValue.toLowerCase())
+                    || Integer.toString(building.getZipCode()).equals(searchValue)) {
+                matchingBuildings.add(building);
+            }
+        }
+
+        model.addAttribute("title", "Search Building");
+        model.addAttribute("buildings", matchingBuildings);
+        return "building/results";
     }
 }
