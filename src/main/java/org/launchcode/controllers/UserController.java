@@ -31,10 +31,13 @@ public class UserController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String processLoginForm(Model model, @RequestParam String loginUsername, @RequestParam String loginPassword) {
+
         Iterable<User> users = userDao.findAll();
+        String foundUsername = "";
 
         for (User user : users) {
             if (user.getUsername().equals(loginUsername)) {
+                foundUsername.equals(user.getUsername());
                 if (user.getPassword().equals(loginPassword)) {
                     model.addAttribute("user", user);
                     return "user/welcome";
@@ -42,14 +45,17 @@ public class UserController {
                 else {
                     model.addAttribute("title", "Login");
                     model.addAttribute("loginUsername", loginUsername);
+                    model.addAttribute("errorMessage", "Password is incorrect!");
                     return "user/login";
                 }
             }
-            else {
-                model.addAttribute("title", "Login");
-                model.addAttribute("loginUsername", loginUsername);
-                return "user/login";
-            }
+        }
+
+        if (foundUsername.isEmpty()) {
+            model.addAttribute("title", "Login");
+            model.addAttribute("loginUsername", loginUsername);
+            model.addAttribute("errorMessage", "Username not found!");
+            return "user/login";
         }
         model.addAttribute("users", users);
         return "user/index";
