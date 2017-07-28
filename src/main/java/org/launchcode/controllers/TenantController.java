@@ -46,6 +46,7 @@ public class TenantController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Tenant");
+            model.addAttribute("buildings", buildingDao.findAll());
             return "tenant/add";
         }
 

@@ -20,7 +20,7 @@ public class Tenant {
     private int id;
 
     @NotNull
-    @Size(min=3, max=20)
+    @Size(min=3, max=20, message="Name must be between 3 and 20 characters.")
     private String name;
 
     @ManyToOne
@@ -29,7 +29,7 @@ public class Tenant {
     private String unit;
 
     @NotNull
-    @Size(min=7, max=10)
+    @Size(min=10, max=10, message="Phone number must be 10 numbers.")
     private String phoneNumber;
 
     private String altNumber;
@@ -37,10 +37,11 @@ public class Tenant {
     @Email
     private String email;
 
-    @NotNull
+    @NotNull(message="Please enter a monthly rent amount.")
     private Integer rent;
 
     @NotNull
+    @Size(min=10, max=10, message="Please enter a valid date.")
     private String moveInDate;
 
     public Tenant(String name, String phoneNumber, String altNumber, String email, Integer rent, String moveInDate) {
